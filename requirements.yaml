@@ -1,0 +1,10 @@
+name: FastAPI
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - fastapi=0.77.1
+  - ipykernel=6.13.0
+  - ipython=7.33.0
+  - python=3.7.11
+  - uvicorn=0.17.6
