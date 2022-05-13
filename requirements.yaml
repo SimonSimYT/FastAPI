@@ -1,21 +1,27 @@
 name: fastapi
 channels:
+  - anaconda
   - conda-forge
   - defaults
 dependencies:
   - anyio=3.5.0
+  - argon2_cffi=19.1.0
   - asgiref=3.5.0
   - backcall=0.2.0
   - backports=1.0
   - backports.functools_lru_cache=1.6.4
-  - ca-certificates=2021.10.8
+  - bcrypt=3.2.0
+  - ca-certificates=2022.4.26
   - certifi=2021.10.8
+  - cffi=1.15.0
   - click=8.1.3
   - colorama=0.4.4
+  - cryptography=36.0.0
   - debugpy=1.6.0
   - decorator=5.1.1
   - entrypoints=0.4
   - fastapi=0.77.1
+  - greenlet=1.1.1
   - h11=0.13.0
   - idna=3.3
   - importlib-metadata=4.11.3
@@ -27,13 +33,15 @@ dependencies:
   - libsodium=1.0.18
   - matplotlib-inline=0.1.3
   - nest-asyncio=1.5.5
-  - openssl=1.1.1o
+  - openssl=1.1.1n
   - packaging=21.3
   - parso=0.8.3
+  - passlib=1.7.4
   - pickleshare=0.7.5
   - pip=21.2.4
   - prompt-toolkit=3.0.29
   - psutil=5.9.0
+  - pycparser=2.21
   - pydantic=1.9.0
   - pygments=2.12.0
   - pyparsing=3.0.9
@@ -46,6 +54,7 @@ dependencies:
   - setuptools=61.2.0
   - six=1.16.0
   - sniffio=1.2.0
+  - sqlalchemy=1.4.32
   - sqlite=3.38.3
   - starlette=0.19.1
   - tornado=6.1
