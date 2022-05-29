@@ -3,6 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from typing import Optional
+from auth import get_current_user, get_user_exception
 
 import models
 from database import engine, SessionLocal
@@ -36,6 +37,14 @@ async def read_todo(todo_id: int, db:Session = Depends(get_db)):
     if todo_model is not None:
         return todo_model
     raise http_exception
+
+@app.get("/todos/user")
+async def read_all_by_user(
+    user: dict = Depends(get_current_user),
+    db: Session = Depends(get_db)):
+    if user is None:
+        raise get_user_exception()
+    return db.query(models.Todos).filter(models.Todos.owner_id == user.get("id")).all()
 
 @app.post("/")
 async def create_todo(todo: ToDo, db: Session = Depends(get_db)):

@@ -1,7 +1,7 @@
 from typing import Optional
 
 from datetime import datetime, timedelta
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 from passlib.context import CryptContext
@@ -86,15 +86,6 @@ async def create_new_user(create_user: CreateUser, db: Session=Depends(get_db)):
         "transaction": "successful"
     }
 
-# @app.post("/token")
-# async def login_for_access_token(
-#     form_data: OAuth2PasswordRequestForm = Depends(),
-#     db: Session = Depends(get_db)):
-#     user = authenticate_user(form_data.username, form_data.password, db)
-#     if not user:
-#         raise HTTPException(status_code=404, detail="User not Found")
-#     return "Validated"
-
 @app.post("/token")
 async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
@@ -108,13 +99,28 @@ async def login_for_access_token(
 
 async def get_current_user(token: str = Depends(oauth2_bearer)):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithm=[ALGORITHM])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
         user_id: int = payload.get("id")
         if username is None or user_id is None:
-            raise HTTPException(status_code=404, detail="User not found")
+            raise get_user_exception()
         return {"username": username, "id": user_id}
     except JWTError:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise get_user_exception()
 
 #Exceptions
+def get_user_exception():
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"}
+    )
+    return credentials_exception
+
+def token_exception():
+    token_exception_response = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Incorrect username or password",
+        headers={"WWW-Authenticate": "Bearer"}
+    )
+    return token_exception_response
