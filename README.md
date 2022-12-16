@@ -2,11 +2,9 @@
 
 This repo uses content from 
 
-Dive in and learn FastAPI from scratch! Learn FastAPI, RESTful APIs using Python, SQLAlchemy, OAuth, JWT and way more!
+# 1. Udemy
 
-by Eric Roby
-
-From Udemy 
+Dive in and learn FastAPI from scratch! Learn FastAPI, RESTful APIs using Python, SQLAlchemy, OAuth, JWT and way more! by Eric Roby 
 
 Books1 and Books2 cover the basic operations of FASTAPI
 
@@ -26,3 +24,6 @@ Book2
 ToDoAPP bring together the operations with SQLAlchemy 
 - Setup of SQL engine, SQL Connections, Table Schemas
 - Basic Operation on Sqlite3 on CLI
+
+# 3 FastAPI WEB 
+https://fastapi.tiangolo.com/tutorial 
